@@ -1,5 +1,12 @@
 # Dockerized Mapshaper Tools
 
+![Docker Stars](https://img.shields.io/docker/stars/freifunkhamm/mapshaper.svg)
+![Docker Pulls](https://img.shields.io/docker/pulls/freifunkhamm/mapshaper.svg)
+![Docker Automated](https://img.shields.io/docker/cloud/automated/freifunkhamm/mapshaper)
+![Docker Build](https://img.shields.io/docker/cloud/build/freifunkhamm/mapshaper)
+![Docker Layers](https://img.shields.io/microbadger/layers/freifunkhamm/mapshaper/latest)
+![Docker Image Size](https://img.shields.io/microbadger/image-size/freifunkhamm/mapshaper/latest)
+
 This git repository contains a Dockerfile to dockerize the command line tool "mapshaper", which is a great tool to edit Shapefile, GeoJSON, TopoJSON and CSV files. 
 
 You can find more information about mapshaper at:
@@ -22,7 +29,7 @@ You can use a dockerized tool similar to a tool that use installed locally to yo
 ## Show version:
 ```
 docker run --rm \
-    myfreifunk/mapshaper:latest \
+    freifunk/mapshaper:latest \
     -v
 ```
 
@@ -30,7 +37,7 @@ docker run --rm \
 Instead of typing such an amount wouldn't it be cool to just type `mapshaper -v` as if it where installed via a package manager?
 Just add this to your shell profile (e.g. at the last line of that file):
 ```
-alias mapshaper="docker run --rm -v $(pwd):/data myfreifunk/mapshaper:latest"
+alias mapshaper="docker run --rm -v $(pwd):/data freifunk/mapshaper:latest"
 ```
 Depending on which shell you are using your profile file is e.g. one of these:
 * ~/.zshrc
@@ -55,7 +62,7 @@ There is also a wiki page available: https://github.com/mbloch/mapshaper/wiki/Co
 
 ## Reduce polygon complexity of GeoJSON data
 We, at Freifunk, often do not need the high precision of shape data as provided by Open Streetmap Admin Boundaries (https://wambachers-osm.website/boundaries/).
-OSM shapes files are often between 25 and 55 KB and and be reduced to approximate 6 KB without loosing to mutch details for our needs. This reduces data transmission time but also JavaScript parsing- and rendering-time, especially if you render e.g. more then 70 shapes as Freifunk Münsterland do.
+OSM shapes files are often between 25 and 55 KB and and can be reduced to approximate 6 KB without loosing to mutch details for our needs. This reduces data transmission time but also JavaScript parsing- and rendering-time, especially if you render e.g. more then 70 shapes as Freifunk Münsterland do.
 
 ```
 mapshaper -i sampleData/hamm.geojson -quiet -simplify percentage=10% -o sampleData/hamm_lowResolution.geojson
