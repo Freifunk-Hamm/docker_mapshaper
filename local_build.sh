@@ -5,19 +5,19 @@
 
 
 # Delete old "latest" image
-docker image rm freifunk/mapshaper:latest
+docker image rm freifunkhamm/mapshaper:latest
 
 # Build a new "latest" image
-docker build --file Dockerfile --tag freifunk/mapshaper:latest .
+docker build --file Dockerfile --tag freifunkhamm/mapshaper:latest .
 
 # Get current version
 # Even if this issue (https://github.com/mbloch/mapshaper/issues/364) got fixed we will keep the redirect to stay backward compatible in this build script)
-version=$(docker run --rm freifunk/mapshaper:latest --version 2>&1)
+version=$(docker run --rm freifunkhamm/mapshaper:latest --version 2>&1)
 echo $version
 echo $SHELL
 
 # Tag image with current version string, too
-docker tag freifunk/mapshaper:latest freifunk/mapshaper:${version}
+docker tag freifunkhamm/mapshaper:latest freifunkhamm/mapshaper:${version}
 
 # Display build artifacts
-docker image list | grep freifunk/mapshaper
+docker image list | grep freifunkhamm/mapshaper
