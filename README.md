@@ -14,46 +14,32 @@ You can find more information about mapshaper at:
 * https://github.com/mbloch/mapshaper/wiki/Command-Reference (documentation)
 * https://mapshaper.org/ Mapshape as a WebUI (online editor / online converter)
 
-# Install
-You can find the ready-to-use docker image at docker hub:
-https://hub.docker.com/r/freifunkhamm/mapshaper
 
-Pull the image with:
+# Install
+Instead of typing a long docker command you can copy a tiny shell script to your PATH:
 ```
-docker pull freifunkhamm/mapshaper
+sudo cp mapshaper /usr/local/bin
 ```
+
+You can operate on files in your current work dir, as you would normally do.
+Your work dir is mounted into the docker container for file processing (see script file above: `-v $(pwd):/data`).
+
+Please note that above shell script will download the latest version of this tool, at the point in time, when you run this dockerized tool the first time.
+It will not auto-update to the latest version if a new release will become available in the future. You have to run:
+`docker image rm freifunkhamm/mapshaper` to delete local cached image and to allow to update to latest version on next run.
+
+If you want to use a specific version you can replace `latest` in the above shell script by a concrete version number.
+Available versions are listed here: https://hub.docker.com/r/freifunkhamm/mapshaper/tags
 
 # Run
 You can use a dockerized tool similar to a tool that use installed locally to your workstation.
 
 ## Show version:
 ```
-docker run --rm \
-    freifunk/mapshaper:latest \
-    -v
-```
-
-# Alias
-Instead of typing such an amount wouldn't it be cool to just type `mapshaper -v` as if it where installed via a package manager?
-Just add this to your shell profile (e.g. at the last line of that file):
-```
-alias mapshaper="docker run --rm -v $(pwd):/data freifunk/mapshaper:latest"
-```
-Depending on which shell you are using your profile file is e.g. one of these:
-* ~/.zshrc
-* ~/.bashrc
-* ~/.profile
-
-It will become automatically active for every new terminal. 
-For current active terminal you can just type `source ~/.bashrc` etc. to make the changes active.
-
-`-v $(pwd):/data` mounts your current working dir into that docker container, so you can always operate on files of your current work directory if you use this alias.
-
-We recommend to use a specific version number instead of "latest" to ensure that no "unintended" change will effect you.
-Available versions are listed here: https://hub.docker.com/r/freifunkhamm/mapshaper/tags
+mapshaper -v
+``` 
 
 ## Show help:
-(When you have setup an alias. See above.)
 ```
 mapshaper -h
 ```
@@ -62,11 +48,20 @@ There is also a wiki page available: https://github.com/mbloch/mapshaper/wiki/Co
 
 ## Reduce polygon complexity of GeoJSON data
 We, at Freifunk, often do not need the high precision of shape data as provided by Open Streetmap Admin Boundaries (https://wambachers-osm.website/boundaries/).
-OSM shapes files are often between 25 and 55 KB and and can be reduced to approximate 6 KB without loosing to mutch details for our needs. This reduces data transmission time but also JavaScript parsing- and rendering-time, especially if you render e.g. more then 70 shapes as Freifunk Münsterland do.
+OSM shapes files are often between 25 and 55 KB (and sometimes even greater then 190 KB)  and can be reduced to approximate 6 KB without loosing to mutch details for our needs. This reduces data transmission time but also JavaScript parsing- and rendering-time, especially if you render e.g. more then 70 shapes as Freifunk Münsterland do.
 
 ```
 mapshaper -i sampleData/hamm.geojson -quiet -simplify percentage=10% -o sampleData/hamm_lowResolution.geojson
 ```
+
+# Run (without installation)
+If you do not want to have this dockerized tool to be in your PATH, you can still run it with:
+```
+docker run --rm \
+    freifunk/mapshaper:latest \
+    -v
+```
+
 # Contribute / Build your own version
 Fork this git repo, change Dockerfile, test it and send us pull request.
 
