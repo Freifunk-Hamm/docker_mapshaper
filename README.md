@@ -71,8 +71,8 @@ mapshaper -i sampleData/hamm.geojson -quiet -simplify percentage=10% -o sampleDa
 Fork this git repo, change Dockerfile, test it and send us pull request.
 
 # Build your docker image
-Before executing `build.sh` replace `freifunk/` with your docker hub account name / docker hub organisation name.
+Before executing `local_build.sh` replace `freifunk/` with your docker hub account name / docker hub organisation name.
 ```
-./build.sh
+./local_build.sh
 ```
 

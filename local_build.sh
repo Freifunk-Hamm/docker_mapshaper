@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
-# This script is not used for official releases - it is just available here for your local development convenience
 # This github repository is triggering docker hub on every push to master branch.
 # New docker image will be build automatically and pushed as "latest" and with version number (see git tag) to docker hub.
-
+echo "This script is not used for official releases - it is just available here for your local development convenience"
 
 # Delete old "latest" image
 docker image rm freifunkhamm/mapshaper:latest
