@@ -4,4 +4,4 @@ services:
     build:
       context: .
       dockerfile: DockerfileTests
-    command: dockerhub.autotest.sh
+    command: /dockerhub.autotest.sh
