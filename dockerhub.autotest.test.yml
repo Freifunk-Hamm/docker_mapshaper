@@ -3,5 +3,33 @@ services:
   sut:
     build:
       context: .
-      dockerfile: DockerfileTests
-    command: /dockerhub.autotest.sh
+      dockerfile: dockerHubAutotests/DockerfileTests
+    volumes:
+      - .:/projectroot
+      - ./dockerHubAutotests/tests.sh:/projectroot/tests.sh
+    working_dir: /projectroot
+    environment:
+      - SOURCE_BRANCH
+      - SOURCE_COMMIT
+      - COMMIT_MSG
+      - DOCKER_REPO
+      - DOCKERFILE_PATH
+      - DOCKER_TAG
+      - IMAGE_NAME
+    command: tests.sh
+    depends_on:
+      - trivy
+  trivy:
+    image: aquasec/trivy:0.1.7
+    volumes:
+      - .:/projectroot
+    working_dir: /projectroot
+    environment:
+      - SOURCE_BRANCH
+      - SOURCE_COMMIT
+      - COMMIT_MSG
+      - DOCKER_REPO
+      - DOCKERFILE_PATH
+      - DOCKER_TAG
+      - IMAGE_NAME
+    COMMAND: --no-progress --format json --output report.json --exit-code 0 $DOCKER_REPO:$DOCKER_TAG
