@@ -16,7 +16,7 @@ services:
       - DOCKERFILE_PATH
       - DOCKER_TAG
       - IMAGE_NAME
-    CMD: tests.sh
+    command: tests.sh
     depends_on:
       - trivy
   trivy:
@@ -32,4 +32,4 @@ services:
       - DOCKERFILE_PATH
       - DOCKER_TAG
       - IMAGE_NAME
-    CMD: --no-progress --format json --output report.json --exit-code 0 $DOCKER_REPO:$DOCKER_TAG
+    command: --no-progress --format json --output report.json --exit-code 0 $DOCKER_REPO:$DOCKER_TAG
