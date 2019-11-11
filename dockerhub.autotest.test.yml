@@ -16,7 +16,7 @@ services:
       - DOCKERFILE_PATH
       - DOCKER_TAG
       - IMAGE_NAME
-    command: tests.sh
+    command: /tests.sh
     depends_on:
       - trivy
   trivy:
