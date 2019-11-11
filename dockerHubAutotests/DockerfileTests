@@ -1,4 +1,4 @@
 FROM alpine:latest
-COPY dockerhub.autotest.sh /dockerhub.autotest.sh
+COPY dockerHubAutotests/tests.sh /tests.sh
 WORKDIR /
-CMD /dockerhub.autotest.sh
+CMD /tests.sh
