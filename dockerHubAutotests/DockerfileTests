@@ -1,4 +1,5 @@
 FROM alpine:latest
+RUN apk --no-cache add curl
 COPY dockerHubAutotests/tests.sh /tests.sh
 WORKDIR /
 CMD /tests.sh
