@@ -2,9 +2,6 @@
 echo "Available environment variables:"
 env
 
-echo "Current directory contents:"
-ls -al /projectroot
-
 echo "Wait for Trivy scan result..."
 timeout=0
 while [ ! -f /projectroot/report.json ]; do
@@ -18,8 +15,11 @@ done
 echo "Current directory contents:"
 ls -al /projectroot
 
+echo "Content of Trivy Report"
+cat /projectroot/report.json
+
 echo "Send report to Trivy Report Registry..."
-curl -X POST -H "Content-Type: application/json" -d @/projectroot/report.json https://trivy-report-registry.ff-hamm.de/incoming-report
+curl -X POST -H "Content-Type: application/json" --silent --data-binary "@/projectroot/report.json" https://trivy-report-registry.ff-hamm.de/incoming-report
 
 echo "Tests successful."
 exit 0

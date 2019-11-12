@@ -6,7 +6,6 @@ services:
       dockerfile: dockerHubAutotests/DockerfileTests
     volumes:
       - .:/projectroot
-      - ./dockerHubAutotests/tests.sh:/projectroot/tests.sh
     working_dir: /projectroot
     environment:
       - SOURCE_BRANCH
@@ -32,4 +31,4 @@ services:
       - DOCKERFILE_PATH
       - DOCKER_TAG
       - IMAGE_NAME
-    command: --no-progress --format json --output report.json --exit-code 0 $DOCKER_REPO:$DOCKER_TAG
+    command: --no-progress --format json --output /projectroot/report.json --exit-code 0 $DOCKER_REPO:$DOCKER_TAG
