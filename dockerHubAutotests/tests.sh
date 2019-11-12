@@ -10,8 +10,8 @@ timeout=0
 while [ ! -f /projectroot/report.json ]; do
     sleep 1
     timeout=$((timeout + 1))
-    if [ $timeout -ge 3600 ]; then
-        echo "Exit due to a timeout. We do not want to wait longer then 10 minutes."
+    if [ $timeout -ge 1800 ]; then
+        echo "Exit due to a timeout. We do not want to wait longer then 30 minutes."
         exit 1
     fi
 done
