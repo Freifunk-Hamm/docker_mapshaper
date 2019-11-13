@@ -1,24 +1,6 @@
 version: "3.6"
 services:
   sut:
-    build:
-      context: .
-      dockerfile: dockerHubAutotests/DockerfileTests
-    volumes:
-      - .:/projectroot
-    working_dir: /projectroot
-    environment:
-      - SOURCE_BRANCH
-      - SOURCE_COMMIT
-      - COMMIT_MSG
-      - DOCKER_REPO
-      - DOCKERFILE_PATH
-      - DOCKER_TAG
-      - IMAGE_NAME
-    command: /tests.sh
-    depends_on:
-      - trivy
-  trivy:
     image: aquasec/trivy:0.1.7
     volumes:
       - .:/projectroot
@@ -31,4 +13,4 @@ services:
       - DOCKERFILE_PATH
       - DOCKER_TAG
       - IMAGE_NAME
-    command: --no-progress --format json --output /projectroot/report.json --exit-code 0 $DOCKER_REPO:$DOCKER_TAG
+    command: --no-progress --exit-code 0 $DOCKER_REPO:$DOCKER_TAG
