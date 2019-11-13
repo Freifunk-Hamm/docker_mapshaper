@@ -1,7 +1,9 @@
 version: "3.6"
 services:
   sut:
-    image: aquasec/trivy:0.1.7
+    build:
+      context: .
+      dockerfile: dockerHubAutotests/Dockerfile_Tests
     volumes:
       - .:/projectroot
     working_dir: /projectroot
@@ -13,4 +15,5 @@ services:
       - DOCKERFILE_PATH
       - DOCKER_TAG
       - IMAGE_NAME
-    command: --no-progress --exit-code 0 $DOCKER_REPO:$DOCKER_TAG
+    entrypoint: ""
+    command: /projectroot/dockerHubAutotests/tests.sh

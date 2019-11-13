@@ -1,3 +1,4 @@
 # Ignore Jetbrains IntelliJ IDEA files
 /.idea
 /*.iml
+/report.json
