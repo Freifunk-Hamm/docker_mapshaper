@@ -1,6 +1,6 @@
 name: CI
 
-on: [status]
+on: [docker-hub-autotest-finished]
 
 jobs:
   build:
