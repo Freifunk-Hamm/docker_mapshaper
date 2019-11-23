@@ -1,6 +1,8 @@
 name: CI
 
-on: [docker-hub-autotest-finished]
+on: 
+  repository_dispatch:
+    types: [docker-hub-autotest-finished]
 
 jobs:
   build:
