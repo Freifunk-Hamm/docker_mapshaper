@@ -28,4 +28,4 @@ jobs:
           DOCKER_TAG: latest
         uses: docker://bash
         with:
-          args: ls -al /github/workflow && pwd
+          args: ls -al /github/home
