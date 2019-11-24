@@ -1,4 +1,7 @@
 #!/bin/sh
+echo "Install curl"
+apk --no-cache add curl
+
 echo "Available environment variables:"
 env
 
