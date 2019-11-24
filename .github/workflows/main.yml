@@ -1,8 +1,6 @@
 name: CI
 
-on: 
-  repository_dispatch:
-    types: [docker-hub-autotest-finished]
+on: [push]
 
 jobs:
   build:
@@ -17,3 +15,18 @@ jobs:
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
+  security:
+    name: "Security related jobs"
+    runs-on: [ubuntu-latest]
+    timeout-minutes: 30
+    container:
+      image: aquasec/trivy:latest
+    steps:
+      - name: "Vulnerability Scan Of Docker Images With Trivy"
+        env: 
+          DOCKER_REPO: freifunkhamm/mapshaper
+          DOCKER_TAG: latest
+        uses: docker://aquasec/trivy:latest
+        with:
+          entrypoint: /bin/sh
+          args: pwd; ls -al; curl -v; which curl; ./dockerHubAutotests/tests.sh
