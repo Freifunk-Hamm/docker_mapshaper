@@ -26,7 +26,6 @@ jobs:
         env: 
           DOCKER_REPO: freifunkhamm/mapshaper
           DOCKER_TAG: latest
-        uses: docker://aquasec/trivy:latest
+        uses: docker://bash
         with:
-          entrypoint: /bin/sh
-          args: -c ./dockerHubAutotests/tests.sh
+          args: ls -al
