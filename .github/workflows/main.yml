@@ -29,4 +29,4 @@ jobs:
         uses: docker://aquasec/trivy:latest
         with:
           entrypoint: /bin/sh
-          args: -c env && apk --no-cache add curl && curl --version && which curl && ./dockerHubAutotests/tests.sh
+          args: -c ./dockerHubAutotests/tests.sh
