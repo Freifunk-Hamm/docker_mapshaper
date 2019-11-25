@@ -39,7 +39,7 @@ jobs:
         with:
           DOCKER_REPO: freifunkhamm/mapshaper
           DOCKER_TAG: latest
-          args: --no-progress --format json --output report.json "${DOCKER_REPO}:${DOCKER_TAG}"
+          args: --no-progress --format json --output report.json $DOCKER_REPO:$DOCKER_TAG
       - name: "Show result (JSON):"
         run: cat report.json
         
