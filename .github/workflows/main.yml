@@ -24,11 +24,22 @@ jobs:
     steps:
       - name: "Checkout git repo"
         uses: actions/checkout@v1
+      - name: "Show version (Trivy):"
+        env: 
+          DOCKER_REPO: freifunkhamm/mapshaper
+          DOCKER_TAG: latest
+        uses: docker://aquasec/trivy:latest
+        with:
+          args: -v
       - name: "Vulnerability Scan Of Docker Images With Trivy"
         env: 
           DOCKER_REPO: freifunkhamm/mapshaper
           DOCKER_TAG: latest
-        uses: docker://bash
+        uses: docker://aquasec/trivy:latest
         with:
-          args: ls -al /github/workspace
+          DOCKER_REPO: freifunkhamm/mapshaper
+          DOCKER_TAG: latest
+          args: --no-progress --format json --output report.json "${DOCKER_REPO}:${DOCKER_TAG}"
+      - name: "Show result (JSON):"
+        run: cat report.json
         
