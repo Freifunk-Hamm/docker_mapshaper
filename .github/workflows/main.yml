@@ -39,7 +39,7 @@ jobs:
         with:
           DOCKER_REPO: ruby
           DOCKER_TAG: 2.5.0
-          args: --no-progress --format json --output report.json ${{ DOCKER_REPO }}:${{ DOCKER_TAG }}
+          args: --no-progress --format json --output report.json $INPUT_DOCKER_REPO:$INPUT_DOCKER_TAG
       - name: "Show result (JSON):"
         run: cat report.json
         
