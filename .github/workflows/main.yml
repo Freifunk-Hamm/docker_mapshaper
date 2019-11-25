@@ -22,10 +22,13 @@ jobs:
     container:
       image: aquasec/trivy:latest
     steps:
+      - name: "Checkout git repo"
+        uses: actions/checkout@v1
       - name: "Vulnerability Scan Of Docker Images With Trivy"
         env: 
           DOCKER_REPO: freifunkhamm/mapshaper
           DOCKER_TAG: latest
         uses: docker://bash
         with:
-          args: ls -al /github/home
+          args: ls -al /github/workspace
+        
