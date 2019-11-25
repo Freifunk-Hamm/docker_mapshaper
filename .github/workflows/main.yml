@@ -33,13 +33,13 @@ jobs:
           args: -v
       - name: "Vulnerability Scan Of Docker Images With Trivy"
         env: 
-          DOCKER_REPO: freifunkhamm/mapshaper
-          DOCKER_TAG: latest
+          DOCKER_REPO: ruby
+          DOCKER_TAG: 2.5.0
         uses: docker://aquasec/trivy:latest
         with:
-          DOCKER_REPO: freifunkhamm/mapshaper
-          DOCKER_TAG: latest
-          args: --no-progress --format json --output report.json freifunkhamm/mapshaper:latest
+          DOCKER_REPO: ruby
+          DOCKER_TAG: 2.5.0
+          args: --no-progress --format json --output report.json ${{ inputs.DOCKER_REPO }}:${{ inputs.DOCKER_TAG }}
       - name: "Show result (JSON):"
         run: cat report.json
         
