@@ -33,7 +33,7 @@ jobs:
       - name: "Vulnerability Scan Of Docker Images With Trivy"
         uses: docker://aquasec/trivy:latest
         with:
-          args: --format json --output report.json ${{ toJson(github.event.client_payload.ruby) }}:${{ toJson(github.event.client_payload.tag) }}
+          args: --format json --output report.json ${{ toJson(github.event.client_payload.repo) }}:${{ toJson(github.event.client_payload.tag) }}
       - name: "Show result (JSON):"
         run: cat report.json
         
