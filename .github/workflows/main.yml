@@ -27,21 +27,13 @@ jobs:
       - name: "Checkout git repo"
         uses: actions/checkout@v1
       - name: "Show version (Trivy):"
-        env: 
-          DOCKER_REPO: freifunkhamm/mapshaper
-          DOCKER_TAG: latest
         uses: docker://aquasec/trivy:latest
         with:
           args: -v
       - name: "Vulnerability Scan Of Docker Images With Trivy"
-        env: 
-          DOCKER_REPO: ruby
-          DOCKER_TAG: 2.5.0
         uses: docker://aquasec/trivy:latest
         with:
-          DOCKER_REPO: ruby
-          DOCKER_TAG: 2.5.0
-          args: ruby:2.5.0
+          args: --format json --output report.json ${{ toJson(github.event.client_payload.ruby) }}:${{ toJson(github.event.client_payload.tag) }}
       - name: "Show result (JSON):"
         run: cat report.json
         
