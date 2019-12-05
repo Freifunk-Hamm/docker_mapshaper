@@ -25,7 +25,9 @@ curl -X POST -H "Content-Type: application/json" --silent --data-binary "@/proje
 echo "done."
 
 # fails if vulnerabilities of a notable severity are detected:
-if trivy --quiet --severity CRITICAL,HIGH --exit-code 1 "${DOCKER_REPO}:${DOCKER_TAG}" > /dev/null 2>&1; then
+trivy --quiet --severity CRITICAL,HIGH --exit-code 1 "${DOCKER_REPO}:${DOCKER_TAG}" > /dev/null 2>&1
+exitCode=$?
+if [ $exitCode -gt 0 ]; then
   echo "Tests failed! Notable vulnerabilities are detected!"
   exit 1
 fi
