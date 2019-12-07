@@ -8,11 +8,17 @@
 ![Docker Image Size](https://img.shields.io/microbadger/image-size/freifunkhamm/mapshaper/latest)
 
 This git repository contains a Dockerfile to dockerize the command line tool "mapshaper", which is a great tool to edit Shapefile, GeoJSON, TopoJSON and CSV files. 
+This dockerized tool is intended to be used in CI / CD pipelines (e.g. Github Actions, Travis-CI, etc.). 
+
 
 You can find more information about mapshaper at:
 * https://github.com/mbloch/mapshaper (source code)
 * https://github.com/mbloch/mapshaper/wiki/Command-Reference (documentation)
 * https://mapshaper.org/ Mapshape as a WebUI (online editor / online converter)
+
+Docker:
+* https://github.com/Freifunk-Hamm/docker_mapshaper (Dockerfile, Github)
+* https://hub.docker.com/r/freifunkhamm/mapshaper (Docker Image, Dockerhub)
 
 
 # Install
