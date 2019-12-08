@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker run --rm -v $(pwd):/data freifunkhamm/mapshaper:latest
+docker run --rm -v $(pwd):/data freifunkhamm/mapshaper:latest "$@"
